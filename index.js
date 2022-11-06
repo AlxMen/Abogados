@@ -31,7 +31,7 @@ try {
         .use(morgan("combined"))
         .use(cors())
         .use(express.json())
-        .use("", router)
+        .use("/api", router)
         .listen(PORT, (err) => { // usamos PORT para conectar al puerto en .env
             console.info("\n\n" + "=".repeat(40));
             console.info(`💻  SERVER LIVE`);

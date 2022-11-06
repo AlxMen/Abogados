@@ -1,6 +1,10 @@
 const router = require('express').Router()
 
-router.post("/")
+const { 
+    addUser,
+} = require("../controllers/user.controller")
+
+router.post("/", addUser)
 router.get("/:id/citas")
 router.get("/:id/notas")
 router.get("/:id/citas/:clienteId")
