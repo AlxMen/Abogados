@@ -1,5 +1,7 @@
 # Abogados
 
+api para despacho de abogados
+
 ### User Signup/Login
 
 METHOD | ENDPOINT         | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                                                                   | RETURNS
@@ -21,3 +23,14 @@ POST    | /users/:id/notas | YES | admin | Post one note | - | `id`
 PUT     | /users/:id/citas/:citaId | YES | admin | Put one cita of lawyer | - | `id` ,`citaId`
 DELETE  | /users/:id/citas/:citaId | YES | admin / user | Delete one cita | - | `id` ,`citaId`
 DELETE  | /users/:id/notas/:notaId | YES | admin | Delete one nota of lawyer | - | `id` ,`notaId`
+
+## Tools 🛠️
+
+* [Dotenv](https://www.npmjs.com/package/dotenv)
+* [Morgan](https://www.npmjs.com/package/morgan)
+
+## Authors ✒️
+
+* **Jenifer Cabrera Betancor** - [JeniferCB](https://github.com/JeniferCB)
+* **Nicolás Nahuel Faisca Silva** - [NickNahuel23](https://github.com/NickNahuel23)
+* **Alejandro José Cruz Santiago** - [AlxMen](https://github.com/AlxMen)
