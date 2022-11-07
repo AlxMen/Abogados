@@ -1,13 +1,16 @@
 const router = require('express').Router()
 
-const { 
-    getAppointments
+const {
+    getFutureAppointments,
+    getAllAppointments,
+    getNotes
 } = require("../controllers/user.controller")
 
-const { authUser,authAdmin } = require('../utils')
+const { authUser, authAdmin } = require('../utils')
 
-router.get("/:id/appointments",authUser, getAppointments)
-// router.get("/:id/notes")
+router.get("/:id/appointments", authUser, getFutureAppointments)
+router.get("/:id/appointmentAD", authUser, authAdmin, getAllAppointments)
+router.get("/:id/notes", authUser, authAdmin, getNotes)
 // router.get("/:id/appointment/:clientId")
 // router.get("/:id/clients")
 // router.get("/:id/notes/:clientId")
