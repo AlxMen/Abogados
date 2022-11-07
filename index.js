@@ -1,8 +1,11 @@
 process.stdout.write('\x1B[2J\x1B[0f') // Clear terminal screen
+require('dotenv').config()
+
 const cors = require("cors");
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+
 
 const app = express();
 const router = require("./api/routers/router");
@@ -24,15 +27,13 @@ mongooseStart()
 
 
 try {
-    // Start Express Server
-    // creamos const para conectar al puerto en .env
     const PORT = process.env.PORT || 8080
     app
-        .use(morgan("combined"))
+        .use(morgan("dev"))
         .use(cors())
         .use(express.json())
         .use("/api", router)
-        .listen(PORT, (err) => { // usamos PORT para conectar al puerto en .env
+        .listen(PORT, (err) => {
             console.info("\n\n" + "=".repeat(40));
             console.info(`💻  SERVER LIVE`);
             console.info(`📡  PORT: http://localhost:${PORT}`);
