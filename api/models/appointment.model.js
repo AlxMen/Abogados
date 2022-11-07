@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const citaSchema = new mongoose.Schema({
+const appointmentSchema = new mongoose.Schema({
     date: {
         type: String,
         required: true
@@ -19,12 +19,14 @@ const citaSchema = new mongoose.Schema({
         enum: ['laboral', 'civil', 'penal', 'mercantil', 'administrativo', 'fiscal', 'otros'],
         required: true
     },
-    nameclient: {
+    client: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
         required: true
     },
-    namelawyer: {
+    lawyer: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
         required: true
     },
     message: {
@@ -38,6 +40,6 @@ const citaSchema = new mongoose.Schema({
     }
 })
 
-const citaModel = mongoose.model("cita", citaSchema)
+const appointmentModel = mongoose.model("appointment", appointmentSchema)
 
-module.exports = citaModel
+module.exports = appointmentModel

@@ -2,10 +2,14 @@ const router = require("express").Router();
 
 const usersRouter = require("./user.router");
 const authRouter = require("./auth.router")
-const { authUser } = require('../utils/index')
+const appointRouter = require("./appointment.router")
+const noteRouter = require("./note.router")
+const { authUser } = require('../utils')
 
 router.use("/auth", authRouter)
 router.use("/users", usersRouter)
+router.use("/appointment", appointRouter)
+router.use("/note", noteRouter)
 
 router.get('/profile', authUser, (req, res) => {
     res.json(res.locals.user)

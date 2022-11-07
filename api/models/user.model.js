@@ -12,17 +12,16 @@ const userSchema = new mongoose.Schema({
     dni: {
         type: String,
         required: true,
-        //unique: true
+        unique: true
     },
     phone: {
         type: Number,
         required: true,
-        //unique: true
     },
     email: {
         type: String,
         required: true,
-        //unique: true
+        unique: true
     },
     password: {
         type: String,
@@ -30,7 +29,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['usuario', 'admin'],
+        enum: ['user', 'admin'],
         required: true
     },
     admininfo: {
@@ -40,12 +39,12 @@ const userSchema = new mongoose.Schema({
         }],
         register: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'nota',
+            ref: 'note',
         }]
     },
-    citas: [{
+    appointment: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'cita',
+        ref: 'appointment',
     }]
 })
 

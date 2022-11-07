@@ -5,16 +5,18 @@ const noteSchema = new mongoose.Schema({
         type: String,
         maxLength: 500
     },
-    date: {
-        type: date.now(),
-        required: true
+    day: {
+        type: Date,
+        default: Date.now()
     },
     client: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
         required: true
     },
     lawyer: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
         required: true
     }
 })

@@ -1,19 +1,18 @@
 const router = require('express').Router()
 
 const { 
+    getAppointments
 } = require("../controllers/user.controller")
 
 const { authUser,authAdmin } = require('../utils')
 
-// router.get("/:id/citas")
-// router.get("/:id/notas")
-// router.get("/:id/citas/:clienteId")
-// router.get("/:id/clientes")
-// router.get("/:id/notas/:clienteId")
-// router.post("/:id/citas")
-// router.post("/:id/notas")
-// router.put("/:id/citas/:citaId")
-// router.delete("/:id/citas")
-// router.delete("/:id/notas/:notaId")
+router.get("/:id/appointments",authUser, getAppointments)
+// router.get("/:id/notes")
+// router.get("/:id/appointment/:clientId")
+// router.get("/:id/clients")
+// router.get("/:id/notes/:clientId")
+// router.put("/:id/appointments/:appointmentId")
+// router.delete("/:id/appointments")
+// router.delete("/:id/notes/:noteId")
 
 module.exports = router;
