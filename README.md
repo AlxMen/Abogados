@@ -28,6 +28,11 @@ DELETE  | /notes/:notesId | YES | admin | Delete one note of lawyer | `notesId` 
 
 * [Dotenv](https://www.npmjs.com/package/dotenv)
 * [Morgan](https://www.npmjs.com/package/morgan)
+* [Mongoose](https://www.npmjs.com/package/mongoose)
+* [JsonWebToken](https://www.npmjs.com/package/jwt)
+* [Express](https://www.npmjs.com/package/express)
+* [Cors](https://www.npmjs.com/package/cors)
+* [Bcrypt](https://www.npmjs.com/package/bcrypt)
 
 ## Authors ✒️
 
