@@ -13,16 +13,16 @@ POST   | /auth/login      | -     |      | User Login               | `email`, `
 
 METHOD | ENDPOINT         | TOKEN | ROLE | DESCRIPTION              | POST PARAMS                                     | RETURNS
 -------|------------------|-------|------|--------------------------|-------------------------------------------------|--------------------
-GET    | /appointments | YES | admin / user | Get all appointments of lawyer/client |  | `Array Object`
-GET    | /notes | YES | admin | Get all notes of lawyer |  | `Array Object`
-GET    | /apointments/:clientId | YES | admin | Get all appointments of lawyer with one client | `clientId` | `Array Object` 
-GET    | /users/clients | YES | admin | Get all clients of lawyer |  | `Array Object`
-GET    | /notes/:clientId | YES | admin | Get all notes of lawyer with one client | `clientId` | `Array Object`  
-POST    | /appointments | YES | admin / user | Post one appointment | `date`, `hour`, `modality`, `ambit`, `client`, `lawyer`, `message` | `Object`
-POST    | /notes | YES | admin | Post one note | `text`, `client`, `lawyer` | `Object`
-PUT     | /appointments/:appointId | YES | admin | Put one appointment of lawyer | `appointId`, `date`, `hour` | `Object`
-DELETE  | /appointments/:appointId | YES | admin / user | Delete one appointment | `appointId` | `delete Object`
-DELETE  | /notes/:notesId | YES | admin | Delete one note of lawyer | `notesId` | `delete Object`
+GET    | /appointments | YES | admin / user | Get all appointments of lawyer/client |  | `[appointments Object]`
+GET    | /notes | YES | admin | Get all notes of lawyer |  | `[notes Object]`
+GET    | /apointments/:clientId | YES | admin | Get all appointments of lawyer with one client | `clientId` | `[appointments Object]` 
+GET    | /users/clients | YES | admin | Get all clients of lawyer |  | `[clients Object]`
+GET    | /notes/:clientId | YES | admin | Get all notes of lawyer with one client | `clientId` | `[notes Object]`  
+POST    | /appointments | YES | admin / user | Post one appointment | `date`, `hour`, `modality`, `ambit`, `client`, `lawyer`, `message` | `new appointments Object`
+POST    | /notes | YES | admin | Post one note | `text`, `client`, `lawyer` | `new notes Object`
+PUT     | /appointments/:appointId | YES | admin | Put one appointment of lawyer | `appointId`, `date`, `hour` | `modified Object`
+DELETE  | /appointments/:appointId | YES | admin / user | Delete one appointment | `appointId` | `delete appointment Object`
+DELETE  | /notes/:notesId | YES | admin | Delete one note of lawyer | `notesId` | `delete note Object`
 
 ## Tools 🛠️
 
