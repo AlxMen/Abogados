@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         unique: true
     },
     phone: {
-        type: Number,
+        type: String,
         required: true,
     },
     email: {
@@ -32,19 +32,9 @@ const userSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         required: true
     },
-    admininfo: {
-        clients: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'user',
-        }],
-        register: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'note',
-        }]
-    },
-    appointment: [{
+    clients: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'appointment',
+        ref: 'user',
     }]
 })
 

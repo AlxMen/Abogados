@@ -18,7 +18,7 @@ function authUser(req, res, next) {
   }
 }
 
-function authAdmin(req, res, next) {
+function authLawyer(req, res, next) {
   if(res.locals.user.role !== "admin"){
     return res.status(401).send("User not authorized")
   }else {
@@ -28,5 +28,5 @@ function authAdmin(req, res, next) {
 
 module.exports = {
   authUser,
-  authAdmin
+  authLawyer
 }

@@ -1,33 +1,91 @@
 const Appointment = require('../models/appointment.model')
 const User = require('../models/user.model')
 
-function createAppointment(req, res) {
-    Appointment.create(req.body)
-        .then(appoint => {
-            User.findById(req.body.client)
-                .then(user => {
-                    user.appointment.push(appoint._id)
-                    user.save()
-                })
-                .catch(err => res.json(err))
-            User.findById(req.body.lawyer)
-                .then(user => {
-                    user.appointment.push(appoint._id)
-                    user.save()
-                })
-                .catch(err => res.json(err))
-            res.json(appoint)
+async function createAppointment(req, res) {
+    try {
+        // Mirar si podemos crear cita
+        const lawyerHasDate = await Appointment.exists({ 
+            lawyer: req.body.lawyer, 
+            date: req.body.date, 
+            hour: req.body.hour 
         })
-        .catch(err => res.json(err))
+        const clientHasDate = await Appointment.exists({ 
+            client: req.body.client, 
+            date: req.body.date, 
+            hour: req.body.hour 
+        })
+        if (lawyerHasDate || clientHasDate) {
+            return res.status(400).json({ msg: 'No se puede crear cita, duplicada' })
+        }
+
+        const appoint = await Appointment.create(req.body)
+
+        // Add appointment to client
+        const user = await User.findById(req.body.client)
+        user.appointment.push(appoint._id)
+        user.save()
+
+        // Add appointment to lawyer
+        const lawyer = await User.findById(req.body.lawyer)
+        lawyer.appointment.push(appoint._id)
+        lawyer.save()
+
+        res.json(appoint)
+    } catch (error) {
+        res.json(error)
+    }
 }
 
-function updateOneAppointment(req, res) {
-    Appointment.findByIdAndUpdate(req.params.appointId, req.body, { new: true })
-        .then(appoint => res.json(appoint))
-        .catch(err => res.json(err))
+ async function updateOneAppointment(req, res) {
+    try {
+        const appoint = await Appointment.findByIdAndUpdate(req.params.appointId, req.body, { new: true })
+        res.json(appoint)
+    } catch (error) {
+        res.json(error)
+    }   
+}
+
+async function getAllAppointmentsOneClient(req, res) {
+    try {
+        const appoint = await Appointment.find({lawyer: res.locals.user.id, client: req.params.clientId})
+        res.json(appoint)
+    } catch (error) {
+        res.json(error)
+    }
+}
+
+async function getFutureAppointments(req, res) {
+    try {
+        const appoint = await Appointment.find({client: res.locals.user.id})
+        res.json(appoint.filter(e => !e.done))
+    }catch(err){
+        res.json(err)
+    }
+}
+
+async function getAllAppointments(req, res) {
+    try {
+        const appoint = await Appointment.find({lawyer: res.locals.user.id})
+        res.json(appoint)
+    } catch (error) {
+        res.json(error)
+    }
+}
+
+async function deleteAppointment(req, res) {
+    try {
+        const appoint = await Appointment.findByIdAndDelete(req.params.appointId)
+        res.json(appoint)
+    } catch (error) {
+        res.json(error)
+    }
 }
 
 module.exports = {
     createAppointment,
-    updateOneAppointment
+    updateOneAppointment,
+    getAllAppointmentsOneClient,
+    getFutureAppointments,
+    getAllAppointments,
+    deleteAppointment
 }

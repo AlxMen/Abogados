@@ -8,8 +8,8 @@ const { authUser } = require('../utils')
 
 router.use("/auth", authRouter)
 router.use("/users", usersRouter)
-router.use("/appointment", appointRouter)
-router.use("/note", noteRouter)
+router.use("/appointments", appointRouter)
+router.use("/notes", noteRouter)
 
 router.get('/profile', authUser, (req, res) => {
     res.json(res.locals.user)

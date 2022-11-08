@@ -1,20 +1,43 @@
 const Note = require('../models/note.model')
 
-function createNote(req, res) {
-    Note.create(req.body)
-        .then(note => {
-            User.findById(req.body.lawyer)
-                .then(user => {
-                    user.admininfo.register.push(note._id)
-                    user.save()
-                })
-                .catch(err => res.json(err))
-            res.json(note)
-        })
-        .catch(err => res.json(err))
+async function createNote(req, res) {
+    try {
+        const note = await Note.create({lawyer: res.locals.user.id, ...req.body})
+        res.json(note)
+    } catch (error) {
+        res.json(error)
+    }
 }
 
+async function getNotes(req, res) {
+    try {
+        const notes = await Note.find({lawyer: res.locals.user.id})
+        res.json(notes)
+    } catch (error) {
+        res.json(error)
+    }
+}
+
+async function getNotesOneClients(req, res) {
+    try {
+        const notes = await Note.find({lawyer: res.locals.user.id, client: req.params.clientId})
+        res.json(notes)
+    } catch (error) {
+        res.json(error)
+    }
+}
+async function deleteNote (req, res) {
+    try {
+        const notes = await Note.findByIdAndDelete(req.params.notesId)
+        res.json(notes)
+    } catch (error) {
+        res.json(error)
+    }
+}
 
 module.exports = {
-    createNote
+    createNote,
+    getNotes,
+    getNotesOneClients,
+    deleteNote
 }
