@@ -26,6 +26,7 @@ async function getNotesOneClients(req, res) {
         res.json(error)
     }
 }
+
 async function deleteNote (req, res) {
     try {
         const notes = await Note.findByIdAndDelete(req.params.notesId)

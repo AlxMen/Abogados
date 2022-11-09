@@ -11,7 +11,6 @@ const {
 
 const { authUser,authLawyer } = require('../utils')
 
-
 router.get("/client", authUser, getFutureAppointments)
 router.get("/:clientId", authUser, authLawyer, getAllAppointmentsOneClient)
 router.get("/", authUser, authLawyer, getAllAppointments)

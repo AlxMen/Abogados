@@ -3,29 +3,29 @@ const User = require('../models/user.model')
 
 async function createAppointment(req, res) {
     try {
-        // Mirar si podemos crear cita
+        
         const lawyerHasDate = await Appointment.exists({ 
             lawyer: req.body.lawyer, 
             date: req.body.date, 
             hour: req.body.hour 
         })
+
         const clientHasDate = await Appointment.exists({ 
             client: req.body.client, 
             date: req.body.date, 
             hour: req.body.hour 
         })
+
         if (lawyerHasDate || clientHasDate) {
             return res.status(400).json({ msg: 'No se puede crear cita, duplicada' })
         }
 
         const appoint = await Appointment.create(req.body)
 
-        // Add appointment to client
         const user = await User.findById(req.body.client)
         user.appointment.push(appoint._id)
         user.save()
 
-        // Add appointment to lawyer
         const lawyer = await User.findById(req.body.lawyer)
         lawyer.appointment.push(appoint._id)
         lawyer.save()

@@ -26,6 +26,7 @@ async function login(req, res) {
             res.status(400).send(`Email or password incorrect`)
             return
         }
+
         bcrypt.compare(req.body.password, user.password, (err,result) => {
             if (err) throw new Error(err)
             if (!result) {
@@ -35,6 +36,7 @@ async function login(req, res) {
             res.status(200).json({email:user.email,token})
 
         })
+        
     }catch (error) {
         res.status(500).send('Error logging user')
         throw new Error(`Error logging user: ${error}`)
