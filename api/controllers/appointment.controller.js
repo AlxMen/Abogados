@@ -20,17 +20,9 @@ async function createAppointment(req, res) {
             return res.status(400).json({ msg: 'No se puede crear cita, duplicada' })
         }
 
-        const appoint = await Appointment.create(req.body)
-
-        const user = await User.findById(req.body.client)
-        user.appointment.push(appoint._id)
-        user.save()
-
-        const lawyer = await User.findById(req.body.lawyer)
-        lawyer.appointment.push(appoint._id)
-        lawyer.save()
-
+        const appoint = await Appointment.create(req.body)        
         res.json(appoint)
+        
     } catch (error) {
         res.json(error)
     }
