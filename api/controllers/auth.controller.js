@@ -7,6 +7,7 @@ const userModel = require('../models/user.model')
 async function signup(req, res) {
     try {
         req.body.password = bcrypt.hashSync(req.body.password, 10)
+        console.log(req.body)
         const user = await userModel.create(req.body)
         const payload = { email: user.email }
         const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '3h' })
