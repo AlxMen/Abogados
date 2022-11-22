@@ -10,7 +10,7 @@ async function signup(req, res) {
         const user = await userModel.create(req.body)
         const payload = { email: user.email }
         const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '3h' })
-        res.json({ email: user.email, token })
+        res.json({ email:user.email, token, rol:user.rol, id: user.id })
     } catch (error) {
         res.status(500).send(`Error creating user: ${error}`)
         throw new Error(`Error creating user: ${error}`)
@@ -33,7 +33,7 @@ async function login(req, res) {
                 return res.json({error: `Email or password incorrect`})
             }
             const token = jwt.sign({email: user.email}, process.env.SECRET, {expiresIn: '3h'})
-            res.status(200).json({email:user.email,token})
+            res.status(200).json({email:user.email, token, rol:user.rol, id: user.id})
 
         })
         

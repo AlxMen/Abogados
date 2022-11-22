@@ -4,8 +4,8 @@ const {
     getAllClients
 } = require("../controllers/user.controller")
 
-const { authUser, authLawyer } = require('../utils')
+const { authUser } = require('../utils')
 
-router.get("/clients",authUser, authLawyer, getAllClients)
+router.get("/clients",authUser, getAllClients)
 
 module.exports = router;
