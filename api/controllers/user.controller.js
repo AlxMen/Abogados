@@ -9,6 +9,16 @@ async function getAllClients(req, res) {
     }
 }
 
+async function getAlluser(req, res) {
+    try {
+        const users = await Users.find()
+        res.json(users)
+    } catch (error) {
+        res.json(error)
+    }
+}
+
 module.exports = {
-    getAllClients
+    getAllClients,
+    getAlluser
 }
